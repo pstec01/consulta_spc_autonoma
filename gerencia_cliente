@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tabela de Gerenciamento de Clientes</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .column {
+      min-height: 300px;
+      padding: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .negociacao {
+      background-color: #d3d3d3;
+    }
+
+    .orcamento {
+      background-color: #87cefa;
+    }
+
+    .documentacao {
+      background-color: #90ee90;
+    }
+
+    .pagamento {
+      background-color: #ffa07a;
+    }
+
+    .coluna {
+      min-height: 300px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: move;
+      position: relative;
+      z-index: 3;
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="column negociacao" id="negociacao-column">
+          <h4>Negociação</h4>
+          <div class="coluna" id="coluna1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="cliente1" class="client" draggable="true" ondragstart="drag(event)">
+              <h5>Cliente 1</h5>
+              <p>Telefone: 123456789</p>
+            </div>
+            <div id="cliente2" class="client" draggable="true" ondragstart="drag(event)">
+              <h5>Cliente 2</h5>
+              <p>Telefone: 987654321</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="column orcamento" id="orcamento-column">
+          <h4>Orçamento</h4>
+          <div class="coluna" id="coluna2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="column documentacao" id="documentacao-column">
+          <h4>Documentação</h4>
+          <div class="coluna" id="coluna3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="column pagamento" id="pagamento-column">
+          <h4>Pagamento</h4>
+          <div class="coluna" id="coluna4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function allowDrop(event) {
+      event.preventDefault();
+    }
+
+    function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function drop(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("text");
+      event.target.appendChild(document.getElementById(data));
+    }
+  </script>
+</body>
+
+</html>
